@@ -23,11 +23,11 @@ import os
 from zohosdk.src.com.zoho.util import StreamWrapper
 
 
-class EditDocument:
+class CoEditDocument:
 
     @staticmethod
     def execute():
-        EditDocument.init_sdk()
+        CoEditDocument.init_sdk()
         createDocumentParams = CreateDocumentParameters()
 
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
@@ -131,6 +131,7 @@ class EditDocument:
 
         # createDocumentParams.set_url('https://demo.office-integrator.com/zdocs/LabReport.zdoc')
 
+        # Creating session1 for collaboration demo
         v1Operations = V1Operations()
         response = v1Operations.create_document(createDocumentParams)
 
@@ -141,9 +142,34 @@ class EditDocument:
             if response_object is not None:
                 if isinstance(response_object, CreateDocumentResponse):
                     print('Document Id : ' + str(response_object.get_document_id()))
-                    print('Document Session ID : ' + str(response_object.get_session_id()))
-                    print('Document Session URL : ' + str(response_object.get_document_url()))
-                    print('Document Session Delete URL : ' + str(response_object.get_session_delete_url()))
+                    print('Document Session 1 ID : ' + str(response_object.get_session_id()))
+                    print('Document Session 1 URL : ' + str(response_object.get_document_url()))
+                    print('Document Session 1 Delete URL : ' + str(response_object.get_session_delete_url()))
+                    print('Document Delete URL : ' + str(response_object.get_document_delete_url()))
+
+        # Creating session2 for collaboration demo
+        # Need to use same Document meta to create session for same document again. So modify only other parameters
+        # For demo purpose only same configuration object used. Also, two document session created in same request.
+
+        # Add User meta to identify the user in document session
+        userInfo = UserInfo()
+        userInfo.set_user_id("1001")
+        userInfo.set_display_name("User 2")
+
+        createDocumentParams.set_user_info(userInfo)
+
+        response = v1Operations.create_document(createDocumentParams)
+
+        if response is not None:
+            print('Status Code: ' + str(response.get_status_code()))
+            response_object = response.get_object()
+
+            if response_object is not None:
+                if isinstance(response_object, CreateDocumentResponse):
+                    print('Document Id : ' + str(response_object.get_document_id()))
+                    print('Document Session 2 ID : ' + str(response_object.get_session_id()))
+                    print('Document Session 2 URL : ' + str(response_object.get_document_url()))
+                    print('Document Session 2 Delete URL : ' + str(response_object.get_session_delete_url()))
                     print('Document Delete URL : ' + str(response_object.get_document_delete_url()))
 
     @staticmethod
@@ -165,4 +191,4 @@ class EditDocument:
             print(ex.code)
 
 
-EditDocument.execute()
+CoEditDocument.execute()
