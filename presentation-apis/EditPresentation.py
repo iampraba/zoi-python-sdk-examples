@@ -33,7 +33,7 @@ class EditPresentation:
         print('Path for source file to be edited : ' + filePath)
         createPresentationParams.set_document(StreamWrapper(file_path=filePath))
 
-        # createDocumentParams.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
+        # createPresentationParams.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
 
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
         documentInfo = DocumentInfo()

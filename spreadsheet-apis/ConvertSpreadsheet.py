@@ -32,6 +32,8 @@ class ConvertSpreadsheet:
         print('Path for source file to be edited : ' + filePath)
         sheetConversionParameters.set_document(StreamWrapper(file_path=filePath))
 
+        # sheetConversionParameters.set_url('https://demo.office-integrator.com/samples/sheet/Contact_List.xlsx')
+
         outputOptions = SheetConversionOutputOptions()
 
         outputOptions.set_format("pdf")

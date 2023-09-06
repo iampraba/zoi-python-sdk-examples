@@ -41,7 +41,7 @@ class PreviewSpreadsheet:
         print('Path for source file to be edited : ' + filePath)
         previewParameter.set_document(StreamWrapper(file_path=filePath))
 
-        # previewParameter.set_url('https://demo.office-integrator.com/zdocs/LabReport.zdoc')
+        # previewParameter.set_url('https://demo.office-integrator.com/samples/sheet/Contact_List.xlsx')
 
         v1Operations = V1Operations()
         response = v1Operations.create_sheet_preview(previewParameter)

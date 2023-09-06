@@ -16,6 +16,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1 import InvalidConfigurationExcepti
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
+
 class DeletePresentation:
 
     @staticmethod
