@@ -1,1 +1,1 @@
-zoi-python-sdk==1.0.0
+zoi-python-sdk==1.0.2

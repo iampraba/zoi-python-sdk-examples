@@ -1,4 +1,5 @@
 # This is a sample Python script.
+import os
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
@@ -7,39 +8,46 @@ from zohosdk.src.com.zoho.exception.sdk_exception import SDKException
 from zohosdk.src.com.zoho.user_signature import UserSignature
 from zohosdk.src.com.zoho.dc.data_center import DataCenter
 from zohosdk.src.com.zoho.api.authenticator.api_key import APIKey
+from zohosdk.src.com.zoho.util import StreamWrapper
 from zohosdk.src.com.zoho.util.constants import Constants
 from zohosdk.src.com.zoho.api.logger import Logger
 from zohosdk.src.com.zoho import Initializer
 
-from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentInfo, UserInfo, Margin, DocumentDefaults, EditorSettings, \
-    UiOptions, CallbackSettings, InvalidConfigurationException
-from zohosdk.src.com.zoho.officeintegrator.v1.create_document_parameters import CreateDocumentParameters
+from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentInfo, UserInfo, \
+    CallbackSettings, InvalidConfigurationException, CreatePresentationParameters, ZohoShowEditorSettings
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 import time
 
 
-class CreateDocument:
+class CoEditPresentation:
 
     @staticmethod
     def execute():
-        CreateDocument.init_sdk()
-        createDocumentParams = CreateDocumentParameters()
+        CoEditPresentation.init_sdk()
+        createPresentationParams = CreatePresentationParameters()
+
+        createPresentationParams.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
+
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Zoho_Show.pptx"
+        # print('Path for source file to be edited : ' + filePath)
+        # createPresentationParams.set_document(StreamWrapper(file_path=filePath))
 
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
         documentInfo = DocumentInfo()
-        documentInfo.set_document_name("New Document")
+        documentInfo.set_document_name("New Presentation")
         documentInfo.set_document_id((round(time.time() * 1000)).__str__())
 
-        createDocumentParams.set_document_info(documentInfo)
+        createPresentationParams.set_document_info(documentInfo)
 
         # Optional Configuration - Add User meta in request to identify the user in document session
         userInfo = UserInfo()
         userInfo.set_user_id("1000")
         userInfo.set_display_name("User 1")
 
-        createDocumentParams.set_user_info(userInfo)
+        createPresentationParams.set_user_info(userInfo)
 
         # Optional Configuration - Add callback settings to configure.
         # how file needs to be received while saving the document
@@ -66,59 +74,23 @@ class CreateDocument:
         saveUrlHeaders['access_token'] = '12dweds32r42wwds34'
         saveUrlHeaders['client_id'] = '12313111'
 
-        callbackSettings.set_save_url_headers(saveUrlHeaders)
+        # callbackSettings.set_save_url_headers(saveUrlHeaders)
 
         callbackSettings.set_retries(1)
         callbackSettings.set_timeout(10000)
-        callbackSettings.set_save_format("zdoc")
+        callbackSettings.set_save_format("pptx")
         callbackSettings.set_http_method_type("post")
         callbackSettings.set_save_url(
             "https://officeintegrator.zoho.com/v1/api/webhook/savecallback/601e12157123434d4e6e00cc3da2406df2b9a1d84a903c6cfccf92c8286")
 
-        createDocumentParams.set_callback_settings(callbackSettings)
-
-        # Optional Configuration - Set margin while creating document itself.
-        # It's applicable only for new documents.
-        margin = Margin()
-
-        margin.set_top("1in")
-        margin.set_bottom("1in")
-        margin.set_left("1in")
-        margin.set_right("1in")
-
-        # Optional Configuration - Set default settings for document while creating document itself.
-        # It's applicable only for new documents.
-        documentDefaults = DocumentDefaults()
-
-        documentDefaults.set_font_size(12)
-        documentDefaults.set_paper_size("A4")
-        documentDefaults.set_font_name("Arial")
-        documentDefaults.set_track_changes("enabled")
-        documentDefaults.set_orientation("landscape")
-
-        documentDefaults.set_margin(margin)
-        documentDefaults.set_language("ta")
-
-        createDocumentParams.set_document_defaults(documentDefaults)
+        createPresentationParams.set_callback_settings(callbackSettings)
 
         # Optional Configuration
-        editorSettings = EditorSettings()
+        editorSettings = ZohoShowEditorSettings()
 
-        editorSettings.set_unit("in")
         editorSettings.set_language("en")
-        editorSettings.set_view("pageview")
 
-        createDocumentParams.set_editor_settings(editorSettings)
-
-        # Optional Configuration
-        uiOptions = UiOptions()
-
-        uiOptions.set_dark_mode("show")
-        uiOptions.set_file_menu("show")
-        uiOptions.set_save_button("show")
-        uiOptions.set_chat_panel("show")
-
-        createDocumentParams.set_ui_options(uiOptions)
+        createPresentationParams.set_editor_settings(editorSettings)
 
         # Optional Configuration - Configure permission values for session
         # based of you application requirement
@@ -127,15 +99,11 @@ class CreateDocument:
         permissions["document.export"] = True
         permissions["document.print"] = True
         permissions["document.edit"] = True
-        permissions["review.comment"] = True
-        permissions["review.changes.resolve"] = True
-        permissions["document.pausecollaboration"] = True
-        permissions["document.fill"] = False
 
-        createDocumentParams.set_permissions(permissions)
+        createPresentationParams.set_permissions(permissions)
 
         v1Operations = V1Operations()
-        response = v1Operations.create_document(createDocumentParams)
+        response = v1Operations.create_presentation(createPresentationParams)
 
         if response is not None:
             print('Status Code: ' + str(response.get_status_code()))
@@ -143,11 +111,11 @@ class CreateDocument:
 
             if responseObject is not None:
                 if isinstance(responseObject, CreateDocumentResponse):
-                    print('Document Id : ' + str(responseObject.get_document_id()))
-                    print('Document Session ID : ' + str(responseObject.get_session_id()))
-                    print('Document Session URL : ' + str(responseObject.get_document_url()))
-                    print('Document Session Delete URL : ' + str(responseObject.get_session_delete_url()))
-                    print('Document Delete URL : ' + str(responseObject.get_document_delete_url()))
+                    print('\nPresentation Id : ' + str(responseObject.get_document_id()))
+                    print('Presentation Session 1 ID : ' + str(responseObject.get_session_id()))
+                    print('Presentation Session 1 URL : ' + str(responseObject.get_document_url()))
+                    print('Presentation Session 1 Delete URL : ' + str(responseObject.get_session_delete_url()))
+                    print('Presentation Delete URL : ' + str(responseObject.get_document_delete_url()))
                 elif isinstance(responseObject, InvalidConfigurationException):
                     print('Invalid configuration exception.')
                     print('Error Code  : ' + str(responseObject.get_code()))
@@ -157,7 +125,38 @@ class CreateDocument:
                     if responseObject.get_key_name() is not None:
                         print("Error Key Name : " + str(responseObject.get_key_name()))
                 else:
-                    print('Document Creation Request Failed')
+                    print('Presentation Creation Request Failed')
+
+        # Add User meta to identify the user in document session
+        userInfo = UserInfo()
+        userInfo.set_user_id("1001")
+        userInfo.set_display_name("User 2")
+
+        createPresentationParams.set_user_info(userInfo)
+
+        response = v1Operations.create_presentation(createPresentationParams)
+
+        if response is not None:
+            print('Status Code: ' + str(response.get_status_code()))
+            responseObject = response.get_object()
+
+            if responseObject is not None:
+                if isinstance(responseObject, CreateDocumentResponse):
+                    print('\nPresentation Id : ' + str(responseObject.get_document_id()))
+                    print('Presentation Session 2 ID : ' + str(responseObject.get_session_id()))
+                    print('Presentation Session 2 URL : ' + str(responseObject.get_document_url()))
+                    print('Presentation Session 2 Delete URL : ' + str(responseObject.get_session_delete_url()))
+                    print('Presentation Delete URL : ' + str(responseObject.get_document_delete_url()))
+                elif isinstance(responseObject, InvalidConfigurationException):
+                    print('Invalid configuration exception.')
+                    print('Error Code  : ' + str(responseObject.get_code()))
+                    print("Error Message : " + str(responseObject.get_message()))
+                    if responseObject.get_parameter_name() is not None:
+                        print("Error Parameter Name : " + str(responseObject.get_parameter_name()))
+                    if responseObject.get_key_name() is not None:
+                        print("Error Key Name : " + str(responseObject.get_key_name()))
+                else:
+                    print('Presentation Creation Request Failed')
 
     @staticmethod
     def init_sdk():
@@ -178,4 +177,4 @@ class CreateDocument:
             print(ex.code)
 
 
-CreateDocument.execute()
+CoEditPresentation.execute()

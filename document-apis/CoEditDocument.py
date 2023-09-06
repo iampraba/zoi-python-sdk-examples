@@ -11,21 +11,30 @@ from zohosdk.src.com.zoho.util.constants import Constants
 from zohosdk.src.com.zoho.api.logger import Logger
 from zohosdk.src.com.zoho import Initializer
 
-from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentInfo, UserInfo, Margin, DocumentDefaults, EditorSettings, \
-    UiOptions, CallbackSettings, InvalidConfigurationException
+from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentInfo, UserInfo, CallbackSettings, DocumentDefaults, \
+    EditorSettings, UiOptions, InvalidConfigurationException
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_parameters import CreateDocumentParameters
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 import time
+import os
+
+from zohosdk.src.com.zoho.util import StreamWrapper
 
 
-class CreateDocument:
+class CoEditDocument:
 
     @staticmethod
     def execute():
-        CreateDocument.init_sdk()
+        CoEditDocument.init_sdk()
         createDocumentParams = CreateDocumentParameters()
+
+        createDocumentParams.set_url('https://demo.office-integrator.com/zdocs/Graphic-Design-Proposal.docx')
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
+        # print('Path for source file to be edited : ' + filePath)
+        # createDocumentParams.set_document(StreamWrapper(file_path=filePath))
 
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
         documentInfo = DocumentInfo()
@@ -77,26 +86,11 @@ class CreateDocument:
 
         createDocumentParams.set_callback_settings(callbackSettings)
 
-        # Optional Configuration - Set margin while creating document itself.
-        # It's applicable only for new documents.
-        margin = Margin()
-
-        margin.set_top("1in")
-        margin.set_bottom("1in")
-        margin.set_left("1in")
-        margin.set_right("1in")
-
         # Optional Configuration - Set default settings for document while creating document itself.
         # It's applicable only for new documents.
         documentDefaults = DocumentDefaults()
 
-        documentDefaults.set_font_size(12)
-        documentDefaults.set_paper_size("A4")
-        documentDefaults.set_font_name("Arial")
         documentDefaults.set_track_changes("enabled")
-        documentDefaults.set_orientation("landscape")
-
-        documentDefaults.set_margin(margin)
         documentDefaults.set_language("ta")
 
         createDocumentParams.set_document_defaults(documentDefaults)
@@ -134,6 +128,7 @@ class CreateDocument:
 
         createDocumentParams.set_permissions(permissions)
 
+        # Creating session1 for collaboration demo
         v1Operations = V1Operations()
         response = v1Operations.create_document(createDocumentParams)
 
@@ -144,9 +139,9 @@ class CreateDocument:
             if responseObject is not None:
                 if isinstance(responseObject, CreateDocumentResponse):
                     print('Document Id : ' + str(responseObject.get_document_id()))
-                    print('Document Session ID : ' + str(responseObject.get_session_id()))
-                    print('Document Session URL : ' + str(responseObject.get_document_url()))
-                    print('Document Session Delete URL : ' + str(responseObject.get_session_delete_url()))
+                    print('Document Session 1 ID : ' + str(responseObject.get_session_id()))
+                    print('Document Session 1 URL : ' + str(responseObject.get_document_url()))
+                    print('Document Session 1 Delete URL : ' + str(responseObject.get_session_delete_url()))
                     print('Document Delete URL : ' + str(responseObject.get_document_delete_url()))
                 elif isinstance(responseObject, InvalidConfigurationException):
                     print('Invalid configuration exception.')
@@ -157,7 +152,42 @@ class CreateDocument:
                     if responseObject.get_key_name() is not None:
                         print("Error Key Name : " + str(responseObject.get_key_name()))
                 else:
-                    print('Document Creation Request Failed')
+                    print('Create Document Session 1 Request Failed')
+
+        # Creating session2 for collaboration demo
+        # Need to use same Document meta to create session for same document again. So modify only other parameters
+        # For demo purpose only same configuration object used. Also, two document session created in same request.
+
+        # Add User meta to identify the user in document session
+        userInfo = UserInfo()
+        userInfo.set_user_id("1001")
+        userInfo.set_display_name("User 2")
+
+        createDocumentParams.set_user_info(userInfo)
+
+        response = v1Operations.create_document(createDocumentParams)
+
+        if response is not None:
+            print('Status Code: ' + str(response.get_status_code()))
+            responseObject = response.get_object()
+
+            if responseObject is not None:
+                if isinstance(responseObject, CreateDocumentResponse):
+                    print('Document Id : ' + str(responseObject.get_document_id()))
+                    print('Document Session 2 ID : ' + str(responseObject.get_session_id()))
+                    print('Document Session 2 URL : ' + str(responseObject.get_document_url()))
+                    print('Document Session 2 Delete URL : ' + str(responseObject.get_session_delete_url()))
+                    print('Document Delete URL : ' + str(responseObject.get_document_delete_url()))
+                elif isinstance(responseObject, InvalidConfigurationException):
+                    print('Invalid configuration exception.')
+                    print('Error Code  : ' + str(responseObject.get_code()))
+                    print("Error Message : " + str(responseObject.get_message()))
+                    if responseObject.get_parameter_name() is not None:
+                        print("Error Parameter Name : " + str(responseObject.get_parameter_name()))
+                    if responseObject.get_key_name() is not None:
+                        print("Error Key Name : " + str(responseObject.get_key_name()))
+                else:
+                    print('Create Document Session 2 Request Failed')
 
     @staticmethod
     def init_sdk():
@@ -178,4 +208,4 @@ class CreateDocument:
             print(ex.code)
 
 
-CreateDocument.execute()
+CoEditDocument.execute()
