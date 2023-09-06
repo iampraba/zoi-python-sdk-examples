@@ -12,7 +12,7 @@ from zohosdk.src.com.zoho.api.logger import Logger
 from zohosdk.src.com.zoho import Initializer
 
 from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentInfo, UserInfo, CallbackSettings, DocumentDefaults, \
-    EditorSettings, UiOptions
+    EditorSettings, UiOptions, InvalidConfigurationException
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_parameters import CreateDocumentParameters
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
@@ -124,9 +124,7 @@ class CoEditDocument:
 
         ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
         filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
-
         print('Path for source file to be edited : ' + filePath)
-
         createDocumentParams.set_document(StreamWrapper(file_path=filePath))
 
         # createDocumentParams.set_url('https://demo.office-integrator.com/zdocs/LabReport.zdoc')
@@ -137,15 +135,25 @@ class CoEditDocument:
 
         if response is not None:
             print('Status Code: ' + str(response.get_status_code()))
-            response_object = response.get_object()
+            responseObject = response.get_object()
 
-            if response_object is not None:
-                if isinstance(response_object, CreateDocumentResponse):
-                    print('Document Id : ' + str(response_object.get_document_id()))
-                    print('Document Session 1 ID : ' + str(response_object.get_session_id()))
-                    print('Document Session 1 URL : ' + str(response_object.get_document_url()))
-                    print('Document Session 1 Delete URL : ' + str(response_object.get_session_delete_url()))
-                    print('Document Delete URL : ' + str(response_object.get_document_delete_url()))
+            if responseObject is not None:
+                if isinstance(responseObject, CreateDocumentResponse):
+                    print('Document Id : ' + str(responseObject.get_document_id()))
+                    print('Document Session 1 ID : ' + str(responseObject.get_session_id()))
+                    print('Document Session 1 URL : ' + str(responseObject.get_document_url()))
+                    print('Document Session 1 Delete URL : ' + str(responseObject.get_session_delete_url()))
+                    print('Document Delete URL : ' + str(responseObject.get_document_delete_url()))
+                elif isinstance(responseObject, InvalidConfigurationException):
+                    print('Invalid configuration exception.')
+                    print('Error Code  : ' + str(responseObject.get_code()))
+                    print("Error Message : " + str(responseObject.get_message()))
+                    if responseObject.get_parameter_name() is not None:
+                        print("Error Parameter Name : " + str(responseObject.get_parameter_name()))
+                    if responseObject.get_key_name() is not None:
+                        print("Error Key Name : " + str(responseObject.get_key_name()))
+                else:
+                    print('Create Document Session 1 Request Failed')
 
         # Creating session2 for collaboration demo
         # Need to use same Document meta to create session for same document again. So modify only other parameters
@@ -162,15 +170,25 @@ class CoEditDocument:
 
         if response is not None:
             print('Status Code: ' + str(response.get_status_code()))
-            response_object = response.get_object()
+            responseObject = response.get_object()
 
-            if response_object is not None:
-                if isinstance(response_object, CreateDocumentResponse):
-                    print('Document Id : ' + str(response_object.get_document_id()))
-                    print('Document Session 2 ID : ' + str(response_object.get_session_id()))
-                    print('Document Session 2 URL : ' + str(response_object.get_document_url()))
-                    print('Document Session 2 Delete URL : ' + str(response_object.get_session_delete_url()))
-                    print('Document Delete URL : ' + str(response_object.get_document_delete_url()))
+            if responseObject is not None:
+                if isinstance(responseObject, CreateDocumentResponse):
+                    print('Document Id : ' + str(responseObject.get_document_id()))
+                    print('Document Session 2 ID : ' + str(responseObject.get_session_id()))
+                    print('Document Session 2 URL : ' + str(responseObject.get_document_url()))
+                    print('Document Session 2 Delete URL : ' + str(responseObject.get_session_delete_url()))
+                    print('Document Delete URL : ' + str(responseObject.get_document_delete_url()))
+                elif isinstance(responseObject, InvalidConfigurationException):
+                    print('Invalid configuration exception.')
+                    print('Error Code  : ' + str(responseObject.get_code()))
+                    print("Error Message : " + str(responseObject.get_message()))
+                    if responseObject.get_parameter_name() is not None:
+                        print("Error Parameter Name : " + str(responseObject.get_parameter_name()))
+                    if responseObject.get_key_name() is not None:
+                        print("Error Key Name : " + str(responseObject.get_key_name()))
+                else:
+                    print('Create Document Session 2 Request Failed')
 
     @staticmethod
     def init_sdk():
