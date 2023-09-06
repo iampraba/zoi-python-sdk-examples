@@ -12,7 +12,7 @@ from zohosdk.src.com.zoho.api.logger import Logger
 from zohosdk.src.com.zoho import Initializer
 
 from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentDeleteSuccessResponse, AllSessionsResponse, SessionInfo, \
-    SessionMeta, SessionUserInfo, InvalidConfigurationException
+    SessionMeta, SessionUserInfo, InvalidConfigurationException, UserInfo
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_parameters import CreateDocumentParameters
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
@@ -24,6 +24,13 @@ class GetAllSessions:
     def execute():
         GetAllSessions.init_sdk()
         createDocumentParams = CreateDocumentParameters()
+
+        # Optional Configuration - Add User meta in request to identify the user in document session
+        userInfo = UserInfo()
+        userInfo.set_user_id("1000")
+        userInfo.set_display_name("User 1")
+
+        createDocumentParams.set_user_info(userInfo)
 
         print('Creating a document to demonstrate get all document session information api')
         v1Operations = V1Operations()

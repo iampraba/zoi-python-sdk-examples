@@ -28,6 +28,13 @@ class PreviewPresentation:
         PreviewPresentation.init_sdk()
         previewParameter = PresentationPreviewParameters()
 
+        previewParameter.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
+
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Zoho_Show.pptx"
+        # print('Path for source file to be edited : ' + filePath)
+        # previewParameter.set_document(StreamWrapper(file_path=filePath))
+
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
         documentInfo = DocumentInfo()
         documentInfo.set_document_name("New Document")
@@ -36,13 +43,6 @@ class PreviewPresentation:
         previewParameter.set_document_info(documentInfo)
 
         previewParameter.set_language('en')
-
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Zoho_Show.pptx"
-        print('Path for source file to be edited : ' + filePath)
-        previewParameter.set_document(StreamWrapper(file_path=filePath))
-
-        # previewParameter.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
 
         v1Operations = V1Operations()
         response = v1Operations.create_presentation_preview(previewParameter)

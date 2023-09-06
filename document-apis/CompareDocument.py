@@ -25,20 +25,20 @@ class CompareDocument:
         CompareDocument.init_sdk()
         compareDocumentParameters = CompareDocumentParameters();
 
-        # compareDocumentParameters.set_url1('https://demo.office-integrator.com/zdocs/MS_Word_Document_v0.docx')
-        # compareDocumentParameters.set_url2('https://demo.office-integrator.com/zdocs/MS_Word_Document_v1.docx')
+        compareDocumentParameters.set_url1('https://demo.office-integrator.com/zdocs/MS_Word_Document_v0.docx')
+        compareDocumentParameters.set_url2('https://demo.office-integrator.com/zdocs/MS_Word_Document_v1.docx')
 
         ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
         file1Name = "MS_Word_Document_v0.docx"
-        file1Path = ROOT_DIR + "/sample_documents/" + file1Name
-        print('source file1 path : ' + file1Path)
-        compareDocumentParameters.set_document1(StreamWrapper(file_path=file1Path))
+        # file1Path = ROOT_DIR + "/sample_documents/" + file1Name
+        # print('source file1 path : ' + file1Path)
+        # compareDocumentParameters.set_document1(StreamWrapper(file_path=file1Path))
 
         file2Name = "MS_Word_Document_v1.docx"
-        file2Path = ROOT_DIR + "/sample_documents/" + file2Name
-        print('source file1 path : ' + file2Path)
-        compareDocumentParameters.set_document2(StreamWrapper(file_path=file2Path))
+        # file2Path = ROOT_DIR + "/sample_documents/" + file2Name
+        # print('source file1 path : ' + file2Path)
+        # compareDocumentParameters.set_document2(StreamWrapper(file_path=file2Path))
 
         compareDocumentParameters.set_lang("en")
         compareDocumentParameters.set_title(file1Name + " vs " + file2Name)

@@ -28,12 +28,12 @@ class EditPresentation:
         EditPresentation.init_sdk()
         createPresentationParams = CreatePresentationParameters()
 
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Zoho_Show.pptx"
-        print('Path for source file to be edited : ' + filePath)
-        createPresentationParams.set_document(StreamWrapper(file_path=filePath))
+        createPresentationParams.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
 
-        # createPresentationParams.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Zoho_Show.pptx"
+        # print('Path for source file to be edited : ' + filePath)
+        # createPresentationParams.set_document(StreamWrapper(file_path=filePath))
 
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
         documentInfo = DocumentInfo()

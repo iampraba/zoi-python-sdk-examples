@@ -24,12 +24,12 @@ class ConvertDocument:
         ConvertDocument.init_sdk()
         documentConversionParameters = DocumentConversionParameters()
 
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
-        print('Source file to be converted : ' + filePath)
-        documentConversionParameters.set_document(StreamWrapper(file_path=filePath))
+        documentConversionParameters.set_url('https://demo.office-integrator.com/zdocs/Graphic-Design-Proposal.docx')
 
-        # documentConversionParameters.set_url('https://demo.office-integrator.com/zdocs/LabReport.zdoc')
+        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
+        # print('Source file to be converted : ' + filePath)
+        # documentConversionParameters.set_document(StreamWrapper(file_path=filePath))
 
         outputOptions = DocumentConversionOutputOptions()
 

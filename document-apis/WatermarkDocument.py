@@ -11,11 +11,7 @@ from zohosdk.src.com.zoho.util.constants import Constants
 from zohosdk.src.com.zoho.api.logger import Logger
 from zohosdk.src.com.zoho import Initializer
 
-from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentInfo, UserInfo, CallbackSettings, DocumentDefaults, \
-    EditorSettings, UiOptions, InvalidConfigurationException, PreviewParameters, PreviewDocumentInfo, PreviewResponse, \
-    WatermarkParameters, WatermarkSettings, FileBodyWrapper
-from zohosdk.src.com.zoho.officeintegrator.v1.create_document_parameters import CreateDocumentParameters
-from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
+from zohosdk.src.com.zoho.officeintegrator.v1 import InvalidConfigurationException, WatermarkParameters, WatermarkSettings, FileBodyWrapper
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 import time
@@ -31,6 +27,13 @@ class WatermarkDocument:
         WatermarkDocument.init_sdk()
         watermarkParameter = WatermarkParameters()
 
+        watermarkParameter.set_url('https://demo.office-integrator.com/zdocs/Graphic-Design-Proposal.docx')
+
+        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
+        # print('Path for source file to be edited : ' + filePath)
+        # watermarkParameter.set_document(StreamWrapper(file_path=filePath))
+
         watermarkSettings = WatermarkSettings()
 
         watermarkSettings.set_type("text")
@@ -42,13 +45,6 @@ class WatermarkDocument:
         watermarkSettings.set_text("Sample Water Mark Text")
 
         watermarkParameter.set_watermark_settings(watermarkSettings)
-
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
-        print('Path for source file to be edited : ' + filePath)
-        watermarkParameter.set_document(StreamWrapper(file_path=filePath))
-
-        # watermarkParameter.set_url('https://demo.office-integrator.com/zdocs/LabReport.zdoc')
 
         v1Operations = V1Operations()
         response = v1Operations.create_watermark_document(watermarkParameter)

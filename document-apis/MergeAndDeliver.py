@@ -25,30 +25,32 @@ class MergeAndDeliver:
         MergeAndDeliver.init_sdk()
         parameter = MergeAndDeliverViaWebhookParameters()
 
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
-        print('Source document file path : ' + filePath)
-        parameter.set_file_content(StreamWrapper(file_path=filePath))
-        # parameter.set_file_url("https://demo.office-integrator.com/zdocs/Graphic-Design-Proposal.docx")
+        parameter.set_file_url('https://demo.office-integrator.com/zdocs/OfferLetter.zdoc')
+
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
+        # print('Source document file path : ' + filePath)
+        # parameter.set_file_content(StreamWrapper(file_path=filePath))
 
         # filePath = ROOT_DIR + "/sample_documents/csv_data_source.csv"
         # print('Source document file path : ' + filePath)
         # parameter.set_merge_data_csv_content(StreamWrapper(file_path=filePath))
-        # parameter.set_merge_data_csv_url("https://demo.office-integrator.com/data/csv_data_source.csv")
+        # parameter.set_merge_data_csv_url('https://demo.office-integrator.com/data/csv_data_source.csv')
 
-        jsonFilePath = ROOT_DIR + "/sample_documents/candidates.json"
-        print('Data Source Json file to be path : ' + jsonFilePath)
-        parameter.set_merge_data_json_content(StreamWrapper(file_path=jsonFilePath))
-        # parameter.set_merge_data_json_url("https://demo.office-integrator.com/data/candidates.json")
+        parameter.set_merge_data_json_url('https://demo.office-integrator.com/data/candidates.json')
 
-        parameter.set_merge_to("separatedoc")
-        parameter.set_output_format("pdf")
-        parameter.set_password("***")
+        # jsonFilePath = ROOT_DIR + "/sample_documents/candidates.json"
+        # print('Data Source Json file to be path : ' + jsonFilePath)
+        # parameter.set_merge_data_json_content(StreamWrapper(file_path=jsonFilePath))
+
+        parameter.set_merge_to('separatedoc')
+        parameter.set_output_format('pdf')
+        parameter.set_password('***')
 
         webhookSettings = MailMergeWebhookSettings()
 
-        webhookSettings.set_invoke_url("https://officeintegrator.zoho.com/v1/api/webhook/savecallback/601e12157a25e63fc4dfd4e6e00cc3da2406df2b9a1d84a903c6cfccf92c8286")
-        webhookSettings.set_invoke_period("oncomplete")
+        webhookSettings.set_invoke_url('https://officeintegrator.zoho.com/v1/api/webhook/savecallback/601e12157a25e63fc4dfd4e6e00cc3da2406df2b9a1d84a903c6cfccf92c8286')
+        webhookSettings.set_invoke_period('oncomplete')
 
         parameter.set_webhook(webhookSettings)
 

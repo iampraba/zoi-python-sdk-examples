@@ -27,17 +27,17 @@ class ConvertSpreadsheet:
         ConvertSpreadsheet.init_sdk()
         sheetConversionParameters = SheetConversionParameters()
 
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Contact_List.xlsx"
-        print('Path for source file to be edited : ' + filePath)
-        sheetConversionParameters.set_document(StreamWrapper(file_path=filePath))
+        sheetConversionParameters.set_url('https://demo.office-integrator.com/samples/sheet/Contact_List.xlsx')
 
-        # sheetConversionParameters.set_url('https://demo.office-integrator.com/samples/sheet/Contact_List.xlsx')
+        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Contact_List.xlsx"
+        # print('Path for source file to be edited : ' + filePath)
+        # sheetConversionParameters.set_document(StreamWrapper(file_path=filePath))
 
         outputOptions = SheetConversionOutputOptions()
 
-        outputOptions.set_format("pdf")
-        outputOptions.set_document_name("ConvertedSheet.pdf")
+        outputOptions.set_format('pdf')
+        outputOptions.set_document_name('ConvertedSheet.pdf')
 
         sheetConversionParameters.set_output_options(outputOptions)
 

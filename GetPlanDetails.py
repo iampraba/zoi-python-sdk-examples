@@ -14,6 +14,7 @@ from zohosdk.src.com.zoho import Initializer
 from zohosdk.src.com.zoho.officeintegrator.v1 import InvalidConfigurationException, PlanDetails
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
+
 class GetPlanDetails:
 
     @staticmethod

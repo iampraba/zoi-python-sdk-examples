@@ -30,6 +30,13 @@ class EditDocument:
         EditDocument.init_sdk()
         createDocumentParams = CreateDocumentParameters()
 
+        createDocumentParams.set_url('https://demo.office-integrator.com/zdocs/Graphic-Design-Proposal.docx')
+
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
+        # print('Path for source file to be edited : ' + filePath)
+        # createDocumentParams.set_document(StreamWrapper(file_path=filePath))
+
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
         documentInfo = DocumentInfo()
         documentInfo.set_document_name("New Document")
@@ -121,13 +128,6 @@ class EditDocument:
         permissions["document.fill"] = False
 
         createDocumentParams.set_permissions(permissions)
-
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
-        print('Path for source file to be edited : ' + filePath)
-        createDocumentParams.set_document(StreamWrapper(file_path=filePath))
-
-        # createDocumentParams.set_url('https://demo.office-integrator.com/zdocs/LabReport.zdoc')
 
         v1Operations = V1Operations()
         response = v1Operations.create_document(createDocumentParams)

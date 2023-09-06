@@ -21,19 +21,19 @@ class ConvertPresentation:
     @staticmethod
     def execute():
         ConvertPresentation.init_sdk()
-        documentConversionParameters = ConvertPresentationParameters()
+        presentationConversionParameters = ConvertPresentationParameters()
+
+        presentationConversionParameters.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
 
         ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Zoho_Show.pptx"
-        print('Path for source file to be edited : ' + filePath)
-        documentConversionParameters.set_document(StreamWrapper(file_path=filePath))
+        # filePath = ROOT_DIR + "/sample_documents/Zoho_Show.pptx"
+        # print('Path for source file to be edited : ' + filePath)
+        # presentationConversionParameters.set_document(StreamWrapper(file_path=filePath))
 
-        # createDocumentParams.set_url('https://demo.office-integrator.com/samples/show/Zoho_Show.pptx')
-
-        documentConversionParameters.set_format("pdf")
+        presentationConversionParameters.set_format('pdf')
 
         v1Operations = V1Operations()
-        response = v1Operations.convert_presentation(documentConversionParameters)
+        response = v1Operations.convert_presentation(presentationConversionParameters)
 
         if response is not None:
             print('Status Code: ' + str(response.get_status_code()))

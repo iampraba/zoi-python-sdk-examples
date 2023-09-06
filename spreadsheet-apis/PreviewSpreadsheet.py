@@ -25,6 +25,13 @@ class PreviewSpreadsheet:
         PreviewSpreadsheet.init_sdk()
         previewParameter = SheetPreviewParameters()
 
+        previewParameter.set_url('https://demo.office-integrator.com/samples/sheet/Contact_List.xlsx')
+
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Contact_List.xlsx"
+        # print('Path for source file to be edited : ' + filePath)
+        # previewParameter.set_document(StreamWrapper(file_path=filePath))
+
         # Optional Configuration - Configure permission values for session
         # based of you application requirement
         permissions = {}
@@ -35,13 +42,6 @@ class PreviewSpreadsheet:
         previewParameter.set_permissions(permissions)
 
         previewParameter.set_language('en')
-
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Contact_List.xlsx"
-        print('Path for source file to be edited : ' + filePath)
-        previewParameter.set_document(StreamWrapper(file_path=filePath))
-
-        # previewParameter.set_url('https://demo.office-integrator.com/samples/sheet/Contact_List.xlsx')
 
         v1Operations = V1Operations()
         response = v1Operations.create_sheet_preview(previewParameter)

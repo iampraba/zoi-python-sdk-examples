@@ -12,7 +12,7 @@ from zohosdk.src.com.zoho.api.logger import Logger
 from zohosdk.src.com.zoho import Initializer
 
 from zohosdk.src.com.zoho.officeintegrator.v1 import SessionInfo, SessionMeta, SessionUserInfo, \
-    InvalidConfigurationException
+    InvalidConfigurationException, UserInfo
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_parameters import CreateDocumentParameters
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
@@ -25,6 +25,14 @@ class GetSessionDetails:
         createDocumentParams = CreateDocumentParameters()
 
         print('Creating a document to demonstrate get document session information api')
+
+        # Optional Configuration - Add User meta in request to identify the user in document session
+        userInfo = UserInfo()
+        userInfo.set_user_id("1000")
+        userInfo.set_display_name("User 1")
+
+        createDocumentParams.set_user_info(userInfo)
+
         v1Operations = V1Operations()
         response = v1Operations.create_document(createDocumentParams)
 

@@ -29,17 +29,17 @@ class CreateMergeTemplate:
         CreateMergeTemplate.init_sdk()
         createTemplateParams = MailMergeTemplateParameters()
 
-        # createTemplateParams.set_url("https://demo.office-integrator.com/zdocs/Graphic-Design-Proposal.docx")
-        # createTemplateParams.set_merge_data_json_url("https://demo.office-integrator.com/data/candidates.json")
+        createTemplateParams.set_url("https://demo.office-integrator.com/zdocs/Graphic-Design-Proposal.docx")
+        createTemplateParams.set_merge_data_json_url("https://demo.office-integrator.com/data/candidates.json")
 
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
-        print('Source document file path : ' + filePath)
-        createTemplateParams.set_document(StreamWrapper(file_path=filePath))
-
-        jsonFilePath = ROOT_DIR + "/sample_documents/candidates.json"
-        print('Data Source Json file to be path : ' + filePath)
-        createTemplateParams.set_merge_data_json_content(StreamWrapper(file_path=jsonFilePath))
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
+        # print('Source document file path : ' + filePath)
+        # createTemplateParams.set_document(StreamWrapper(file_path=filePath))
+        #
+        # jsonFilePath = ROOT_DIR + "/sample_documents/candidates.json"
+        # print('Data Source Json file to be path : ' + filePath)
+        # createTemplateParams.set_merge_data_json_content(StreamWrapper(file_path=jsonFilePath))
 
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
         documentInfo = DocumentInfo()

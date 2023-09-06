@@ -27,12 +27,12 @@ class EditSpreadsheet:
         EditSpreadsheet.init_sdk()
         editSheetParams = CreateSheetParameters()
 
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Contact_List.xlsx"
-        print('Path for source file to be edited : ' + filePath)
-        editSheetParams.set_document(StreamWrapper(file_path=filePath))
+        editSheetParams.set_url('https://demo.office-integrator.com/samples/sheet/Contact_List.xlsx')
 
-        # editSheetParams.set_url('https://demo.office-integrator.com/samples/sheet/Contact_List.xlsx')
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Contact_List.xlsx"
+        # print('Path for source file to be edited : ' + filePath)
+        # editSheetParams.set_document(StreamWrapper(file_path=filePath))
 
         # Optional Configuration - Add document meta in request to identify the file in Zoho Server
         documentInfo = DocumentInfo()

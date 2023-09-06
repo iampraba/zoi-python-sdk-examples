@@ -44,12 +44,12 @@ class PreviewDocument:
 
         previewParameter.set_permissions(permissions)
 
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
-        print('Path for source file to be edited : ' + filePath)
-        previewParameter.set_document(StreamWrapper(file_path=filePath))
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/Graphic-Design-Proposal.docx"
+        # print('Path for source file to be edited : ' + filePath)
+        # previewParameter.set_document(StreamWrapper(file_path=filePath))
 
-        # previewParameter.set_url('https://demo.office-integrator.com/zdocs/LabReport.zdoc')
+        previewParameter.set_url('https://demo.office-integrator.com/zdocs/LabReport.zdoc')
 
         v1Operations = V1Operations()
         response = v1Operations.create_document_preview(previewParameter)

@@ -25,21 +25,23 @@ class MergeAndDownload:
         MergeAndDownload.init_sdk()
         parameter = MergeAndDownloadDocumentParameters()
 
+        parameter.set_file_url('https://demo.office-integrator.com/zdocs/OfferLetter.zdoc')
+
         ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
-        print('Source document file path : ' + filePath)
-        parameter.set_file_content(StreamWrapper(file_path=filePath))
-        # parameter.set_file_url("https://demo.office-integrator.com/zdocs/Graphic-Design-Proposal.docx")
+        # filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
+        # print('Source document file path : ' + filePath)
+        # parameter.set_file_content(StreamWrapper(file_path=filePath))
 
         # filePath = ROOT_DIR + "/sample_documents/csv_data_source.csv"
         # print('Source document file path : ' + filePath)
         # parameter.set_merge_data_csv_content(StreamWrapper(file_path=filePath))
         # parameter.set_merge_data_csv_url("https://demo.office-integrator.com/data/csv_data_source.csv")
 
-        jsonFilePath = ROOT_DIR + "/sample_documents/candidates.json"
-        print('Data Source Json file to be path : ' + jsonFilePath)
-        parameter.set_merge_data_json_content(StreamWrapper(file_path=jsonFilePath))
-        # parameter.set_merge_data_json_url("https://demo.office-integrator.com/data/candidates.json")
+        parameter.set_merge_data_json_url("https://demo.office-integrator.com/data/candidates.json")
+
+        # jsonFilePath = ROOT_DIR + "/sample_documents/candidates.json"
+        # print('Data Source Json file to be path : ' + jsonFilePath)
+        # parameter.set_merge_data_json_content(StreamWrapper(file_path=jsonFilePath))
 
         parameter.set_output_format('pdf')
         parameter.set_password('***')

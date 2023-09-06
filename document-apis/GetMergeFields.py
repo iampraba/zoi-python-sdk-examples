@@ -26,12 +26,12 @@ class GetMergeFields:
         GetMergeFields.init_sdk()
         getMergeFilesParams = GetMergeFieldsParameters()
 
-        # getMergeFilesParams.set_file_url("https://demo.office-integrator.com/zdocs/OfferLetter.zdoc");
+        getMergeFilesParams.set_file_url("https://demo.office-integrator.com/zdocs/OfferLetter.zdoc");
 
-        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
-        print('Path for source file to be edited : ' + filePath)
-        getMergeFilesParams.set_file_content(StreamWrapper(file_path=filePath))
+        # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        # filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
+        # print('Path for source file to be edited : ' + filePath)
+        # getMergeFilesParams.set_file_content(StreamWrapper(file_path=filePath))
 
         v1Operations = V1Operations()
         response = v1Operations.get_merge_fields(getMergeFilesParams)
