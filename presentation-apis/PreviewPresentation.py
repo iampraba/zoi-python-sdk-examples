@@ -23,6 +23,7 @@ from zohosdk.src.com.zoho.util import StreamWrapper
 
 class PreviewPresentation:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-show-preview-presentation.html
     @staticmethod
     def execute():
         PreviewPresentation.init_sdk()

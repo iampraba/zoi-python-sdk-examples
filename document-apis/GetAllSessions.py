@@ -11,7 +11,7 @@ from zohosdk.src.com.zoho.util.constants import Constants
 from zohosdk.src.com.zoho.api.logger import Logger
 from zohosdk.src.com.zoho import Initializer
 
-from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentDeleteSuccessResponse, AllSessionsResponse, SessionInfo, \
+from zohosdk.src.com.zoho.officeintegrator.v1 import AllSessionsResponse, SessionInfo, \
     SessionMeta, SessionUserInfo, InvalidConfigurationException, UserInfo
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_parameters import CreateDocumentParameters
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
@@ -20,6 +20,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class GetAllSessions:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-writer-get-document-sessions.html
     @staticmethod
     def execute():
         GetAllSessions.init_sdk()

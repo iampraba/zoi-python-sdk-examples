@@ -20,6 +20,7 @@ import os
 
 class PreviewSpreadsheet:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-sheet-preview-spreadsheet.html
     @staticmethod
     def execute():
         PreviewSpreadsheet.init_sdk()

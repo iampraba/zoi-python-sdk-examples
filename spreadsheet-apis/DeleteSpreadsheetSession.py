@@ -20,6 +20,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class DeleteSpreadsheetSession:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-sheet-delete-user-session.html
     @staticmethod
     def execute():
         DeleteSpreadsheetSession.init_sdk()

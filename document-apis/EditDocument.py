@@ -25,6 +25,7 @@ from zohosdk.src.com.zoho.util import StreamWrapper
 
 class EditDocument:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-writer-edit-document.html
     @staticmethod
     def execute():
         EditDocument.init_sdk()

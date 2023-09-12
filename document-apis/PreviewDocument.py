@@ -25,6 +25,7 @@ from zohosdk.src.com.zoho.util import StreamWrapper
 
 class PreviewDocument:
 
+    # Refer Preview API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-writer-preview-document.html
     @staticmethod
     def execute():
         PreviewDocument.init_sdk()

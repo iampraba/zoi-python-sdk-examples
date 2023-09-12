@@ -20,6 +20,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class MergeAndDeliver:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/merge-and-deliver-via-webhook.html
     @staticmethod
     def execute():
         MergeAndDeliver.init_sdk()

@@ -11,8 +11,7 @@ from zohosdk.src.com.zoho.util.constants import Constants
 from zohosdk.src.com.zoho.api.logger import Logger
 from zohosdk.src.com.zoho import Initializer
 
-from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentDeleteSuccessResponse, AllSessionsResponse, SessionInfo, \
-    SessionMeta, SessionUserInfo, DocumentMeta, InvalidConfigurationException
+from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentMeta, InvalidConfigurationException
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_parameters import CreateDocumentParameters
 from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
 from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
@@ -20,6 +19,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class GetDocumentDetails:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-writer-document-details.html
     @staticmethod
     def execute():
         GetDocumentDetails.init_sdk()

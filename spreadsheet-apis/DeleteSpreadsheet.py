@@ -20,6 +20,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class DeleteSpreadsheet:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-sheet-delete-spreadsheet.html
     @staticmethod
     def execute():
         DeleteSpreadsheet.init_sdk()

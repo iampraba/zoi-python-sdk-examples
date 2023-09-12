@@ -19,6 +19,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class GetSessionDetails:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-writer-session-information.html
     @staticmethod
     def execute():
         GetSessionDetails.init_sdk()

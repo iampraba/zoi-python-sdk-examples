@@ -21,6 +21,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class GetMergeFields:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/get-list-of-fields-in-the-document.html
     @staticmethod
     def execute():
         GetMergeFields.init_sdk()

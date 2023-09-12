@@ -19,6 +19,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class DeletePresentation:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-show-delete-presentation.html
     @staticmethod
     def execute():
         DeletePresentation.init_sdk()

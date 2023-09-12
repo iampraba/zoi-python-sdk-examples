@@ -22,6 +22,7 @@ from zohosdk.src.com.zoho.util import StreamWrapper
 
 class WatermarkDocument:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/watermark-with-text.html
     @staticmethod
     def execute():
         WatermarkDocument.init_sdk()

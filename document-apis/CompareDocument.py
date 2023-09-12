@@ -20,6 +20,7 @@ from zohosdk.src.com.zoho.util import StreamWrapper
 
 class CompareDocument:
 
+    # Refer Compare API documentation - https://www.zoho.com/officeintegrator/api/v1/writer-comparison-api.html
     @staticmethod
     def execute():
         CompareDocument.init_sdk()

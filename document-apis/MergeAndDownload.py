@@ -20,6 +20,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class MergeAndDownload:
 
+    # Refer Preview API documentation - https://www.zoho.com/officeintegrator/api/v1/merge-document.html
     @staticmethod
     def execute():
         MergeAndDownload.init_sdk()

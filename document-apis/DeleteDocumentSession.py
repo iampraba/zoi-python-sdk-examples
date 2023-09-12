@@ -19,12 +19,13 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class DeleteDocumentSession:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-writer-delete-user-session.html
     @staticmethod
     def execute():
         DeleteDocumentSession.init_sdk()
         createDocumentParams = CreateDocumentParameters()
 
-        print('Creating a document to demonstrate document delete api')
+        print('Creating a document to demonstrate document session delete api')
         v1Operations = V1Operations()
         response = v1Operations.create_document(createDocumentParams)
 

@@ -25,6 +25,7 @@ from zohosdk.src.com.zoho.util import StreamWrapper
 
 class CoEditDocument:
 
+    # Refer Co-Edit API documentation - https://www.zoho.com/officeintegrator/api/v1/zoho-writer-co-edit-document.html
     @staticmethod
     def execute():
         CoEditDocument.init_sdk()

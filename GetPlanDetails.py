@@ -17,6 +17,7 @@ from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class GetPlanDetails:
 
+    # Refer API documentation - https://www.zoho.com/officeintegrator/api/v1/get-plan-details.html
     @staticmethod
     def execute():
         GetPlanDetails.init_sdk()
