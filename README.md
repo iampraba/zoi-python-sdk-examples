@@ -7,20 +7,18 @@ Zoho Office Integrator Python SDK used to help you quickly integrator Zoho Offic
 
 ## How to run the example codes
 
-You can include the Python to your project using:
-
 - Clone this repository in your local machine.
    ```sh
     git clone https://github.com/iampraba/zoi-python-sdk-examples
     ```
 
-- Install [**Pythod SDK**](https://pypi.org/project/zoi-python-sdk) and other dependencies 
+- Install [**Python SDK**](https://pypi.org/project/zoi-python-sdk) and other dependencies 
     - Navigate to the folder **zoi-python-sdk-examples**
         ```sh
         cd zoi-python-sdk-examples
         ```
 
-    - Run the command below. This command will install pythod sdk and it's dependencies.
+    - Run the command below. This command will install python sdk and it's dependencies.
       ```sh
       pip3 install -r requirements.txt
       ```
