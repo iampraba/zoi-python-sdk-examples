@@ -1,4 +1,4 @@
-Save the [code](https://github.com/iampraba/zoi-python-sdk-examples/blob/main/save_callback_implementation/Flask/save_callback.py) in a file, for example, save_callback.py.
+Save the [code](https://raw.githubusercontent.com/iampraba/zoi-python-sdk-examples/main/save-callback-implementation/Flask/save_callback.py) in a file, for example, save_callback.py.
 
 To run the following commands from your Mac terminal, you should have python and pip command installed on you machine. 
 
