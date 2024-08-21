@@ -1,10 +1,8 @@
-from zohosdk.src.com.zoho.exception.sdk_exception import SDKException
-from zohosdk.src.com.zoho.user_signature import UserSignature
-from zohosdk.src.com.zoho.dc.data_center import DataCenter
-from zohosdk.src.com.zoho.api.authenticator.api_key import APIKey
-from zohosdk.src.com.zoho.util.constants import Constants
-from zohosdk.src.com.zoho.api.logger import Logger
-from zohosdk.src.com.zoho import Initializer
+from officeintegrator.src.com.zoho.officeintegrator.exception.sdk_exception import SDKException
+from officeintegrator.src.com.zoho.officeintegrator.dc import APIServer
+from officeintegrator.src.com.zoho.api.authenticator import Auth
+from officeintegrator.src.com.zoho.officeintegrator.logger import Logger
+from officeintegrator.src.com.zoho.officeintegrator import Initializer
 
 
 class InitializeSdk(object):

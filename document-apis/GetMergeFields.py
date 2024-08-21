@@ -1,23 +1,14 @@
-# This is a sample Python script.
 import os
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-from zohosdk.src.com.zoho.exception.sdk_exception import SDKException
-from zohosdk.src.com.zoho.user_signature import UserSignature
-from zohosdk.src.com.zoho.dc.data_center import DataCenter
-from zohosdk.src.com.zoho.api.authenticator.api_key import APIKey
-from zohosdk.src.com.zoho.util import StreamWrapper
-from zohosdk.src.com.zoho.util.constants import Constants
-from zohosdk.src.com.zoho.api.logger import Logger
-from zohosdk.src.com.zoho import Initializer
-
-from zohosdk.src.com.zoho.officeintegrator.v1 import DocumentMeta, InvalidConfigurationException, \
-    GetMergeFieldsParameters, MergeFieldsResponse, MergeFields
-from zohosdk.src.com.zoho.officeintegrator.v1.create_document_response import CreateDocumentResponse
-from zohosdk.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
-
+from officeintegrator.src.com.zoho.officeintegrator.exception.sdk_exception import SDKException
+from officeintegrator.src.com.zoho.officeintegrator.dc import APIServer
+from officeintegrator.src.com.zoho.api.authenticator import Auth
+from officeintegrator.src.com.zoho.officeintegrator.util import StreamWrapper
+from officeintegrator.src.com.zoho.officeintegrator.logger import Logger
+from officeintegrator.src.com.zoho.officeintegrator import Initializer
+from officeintegrator.src.com.zoho.officeintegrator.v1 import InvalidConfigurationException, \
+    GetMergeFieldsParameters, MergeFieldsResponse, MergeFields, Authentication
+from officeintegrator.src.com.zoho.officeintegrator.v1.v1_operations import V1Operations
 
 class GetMergeFields:
 
@@ -27,7 +18,8 @@ class GetMergeFields:
         GetMergeFields.init_sdk()
         getMergeFilesParams = GetMergeFieldsParameters()
 
-        getMergeFilesParams.set_file_url("https://demo.office-integrator.com/zdocs/OfferLetter.zdoc");
+        # Either use url as document source or attach the document in request body use below methods
+        getMergeFilesParams.set_file_url("https://demo.office-integrator.com/zdocs/OfferLetter.zdoc")
 
         # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
         # filePath = ROOT_DIR + "/sample_documents/OfferLetter.zdoc"
@@ -67,20 +59,16 @@ class GetMergeFields:
     @staticmethod
     def init_sdk():
         try:
-            # Replace email address associated with your apikey below
-            user = UserSignature("john@zylker.com")
-            # Update the api domain based on in which data center user register your apikey
-            # To know more - https://www.zoho.com/officeintegrator/api/v1/getting-started.html
-            environment = DataCenter.Environment("https://api.office-integrator.com", None, None, None)
-            # User your apikey that you have in office integrator dashboard
-            apikey = APIKey("2ae438cf864488657cc9754a27daa480", Constants.PARAMS)
-            # Configure a proper file path to write the sdk logs
+            #Sdk application log configuration
             logger = Logger.get_instance(Logger.Levels.INFO, "./logs.txt")
+            #Update this apikey with your own apikey signed up in office integrator service
+            auth = Auth.Builder().add_param("apikey", "2ae438cf864488657cc9754a27daa480").set_authentication_schema(Authentication.TokenFlow()).build()
+            tokens = [ auth ]
+            # Refer this help page for api end point domain details -  https://www.zoho.com/officeintegrator/api/v1/getting-started.html
+            environment = APIServer.Production("https://api.office-integrator.com")
 
-            Initializer.initialize(user, environment, apikey, None, None, logger, None)
-
+            Initializer.initialize(environment, tokens,None, None, logger, None)
         except SDKException as ex:
             print(ex.code)
-
 
 GetMergeFields.execute()
